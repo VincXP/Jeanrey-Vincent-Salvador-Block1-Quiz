@@ -39,5 +39,29 @@ class MainActivity : AppCompatActivity() {
     fun onEqualClick(view: View) {
         val operand2 = resultTextView.text.toString().toDouble()
         var result = 0.0
+
+        when (operator) {
+            "+" -> result = operand1 + operand2
+            "-" -> result = operand1 - operand2
+            "*" -> result = operand1 * operand2
+            "/" -> {
+                if (operand2 != 0.0) {
+                    result = operand1 / operand2
+                } else {
+                    resultTextView.text = "Error"
+                    return
+                }
+            }
+        }
+
+        resultTextView.text = result.toString()
+        isNewOperation = true
+    }
+
+    fun onClearClick(view: View) {
+        resultTextView.text = ""
+        operand1 = 0.0
+        operator = null
+        isNewOperation = true
     }
 }
