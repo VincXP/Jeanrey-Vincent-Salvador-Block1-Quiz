@@ -8,9 +8,36 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var resultTextView: TextView
+    private var operand1: Double = 0.0
+    private var operator: String? = null
+    private var isNewOperation: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        resultTextView = findViewById(R.id.resultTextView)
+    }
+
+    fun onDigitClick(view: View) {
+        if (isNewOperation) {
+            resultTextView.text = ""
+            isNewOperation = false
+        }
+
+        val digit = (view as Button).text.toString()
+        resultTextView.append(digit)
+    }
+
+    fun onOperatorClick(view: View) {
+        operand1 = resultTextView.text.toString().toDouble()
+        operator = (view as Button).text.toString()
+        isNewOperation = true
+    }
+
+    fun onEqualClick(view: View) {
+        val operand2 = resultTextView.text.toString().toDouble()
+        var result = 0.0
     }
 }
